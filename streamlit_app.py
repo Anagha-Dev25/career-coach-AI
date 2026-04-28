@@ -84,6 +84,7 @@ st.markdown("""
 
     .premium-card {
         background: white;
+        color: black;
         border: 1px solid #F0F0F0;
         border-radius: 24px;
         padding: 32px;
@@ -91,6 +92,23 @@ st.markdown("""
         text-align: center;
         margin-bottom: 20px;
     }
+
+    /* 🔥 Dark mode adaptive */
+    @media (prefers-color-scheme: dark) {
+    .premium-card {
+        background: #1e1e1e !important;
+        color: white !important;
+        border: 1px solid #333 !important;
+    }
+
+    .premium-card p,
+    .premium-card h1,
+    .premium-card h2,
+    .premium-card h3,
+    .premium-card h4 {
+        color: white !important;
+    }
+}       
 
     /* Premium Button Style */
     .stButton>button {
@@ -466,7 +484,7 @@ elif st.session_state.page == "Predictions":
                 <div class="premium-card" style="min-height: 220px; border-top: 4px solid #A855F7;">
                     <p style="color: #6366F1; font-weight: 800; font-size: 0.8rem; margin: 0;">MATCH RANK #{idx+1}</p>
                     <h3 style="margin: 10px 0; min-height: 50px;">{role}</h3>
-                    <h2 style="color: #111; margin: 5px 0;">{data['fit']}%</h2>
+                    <h2 style="margin: 5px 0;">{data['fit']}%</h2>
                     <p style="color: #666; font-size: 0.9rem; margin-bottom: 0;">Est. 2026 TC:</p>
                     <h4 style="color: #A855F7; margin-top: 0;">{data['salary']} /yr</h4>
                 </div>
