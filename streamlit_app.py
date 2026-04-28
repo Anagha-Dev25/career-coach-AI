@@ -300,47 +300,44 @@ elif st.session_state.page == "Analyzer":
         st.plotly_chart(fig, use_container_width=True)
 
         # --- PDF GENERATION ---
-        from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Image
+        from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
         from reportlab.lib.styles import getSampleStyleSheet
-        from reportlab.lib.units import inch
-        import tempfile
-
-        with tempfile.NamedTemporaryFile(delete=False, suffix=".png") as tmpfile:
-            fig.write_image(tmpfile.name)
-            chart_path = tmpfile.name
+        import io        
 
         pdf_buffer = io.BytesIO()
         doc = SimpleDocTemplate(pdf_buffer)
-        styles = getSampleStyleSheet()
+        styles = getSampleStyleSheet()        
 
-        content = []
+        content = []        
+
         content.append(Paragraph("PATHFINDER AI PRO - CAREER ANALYSIS REPORT", styles['Title']))
-        content.append(Spacer(1, 12))
+        content.append(Spacer(1, 12))        
+
         content.append(Paragraph(f"<b>Target Role:</b> {st.session_state.target_job}", styles['Normal']))
-        content.append(Spacer(1, 12))
+        content.append(Spacer(1, 12))        
+
         content.append(Paragraph("<b>Analysis:</b>", styles['Heading2']))
         content.append(Paragraph(analysis_text, styles['Normal']))
-        content.append(Spacer(1, 12))
+        content.append(Spacer(1, 12))        
 
         content.append(Paragraph("<b>Skill Scores:</b>", styles['Heading2']))
         for k, v in scores_data.items():
-            content.append(Paragraph(f"{k}: {v}", styles['Normal']))
+            content.append(Paragraph(f"{k}: {v}", styles['Normal']))        
 
         content.append(Spacer(1, 20))
-        content.append(Paragraph("<b>Skill Radar:</b>", styles['Heading2']))
-        content.append(Spacer(1, 10))
-        content.append(Image(chart_path, width=4*inch, height=4*inch))
+        content.append(Paragraph("<b>Skill Radar:</b> Available in web view", styles['Normal']))        
 
         doc.build(content)
-        pdf_buffer.seek(0)
+        pdf_buffer.seek(0)        
 
         st.download_button(
-            label="📥 DOWNLOAD PDF REPORT",
-            data=pdf_buffer,
-            file_name="career_analysis_report.pdf",
-            mime="application/pdf",
-            use_container_width=True
+             label="📥 DOWNLOAD PDF REPORT",
+             data=pdf_buffer,
+             file_name="career_analysis_report.pdf",
+             mime="application/pdf",
+             use_container_width=True
         )
+             
 
     if st.button("✨ Try Sample Resume"):
         with st.spinner("Analyzing sample resume..."):
