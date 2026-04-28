@@ -83,32 +83,15 @@ st.markdown("""
     }
 
     .premium-card {
-        background: white;
-        color: black;
-        border: 1px solid #F0F0F0;
-        border-radius: 24px;
-        padding: 32px;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
-        text-align: center;
-        margin-bottom: 20px;
-    }
-
-    /* 🔥 Dark mode adaptive */
-    @media (prefers-color-scheme: dark) {
-    .premium-card {
-        background: #1e1e1e !important;
-        color: white !important;
-        border: 1px solid #333 !important;
-    }
-
-    .premium-card p,
-    .premium-card h1,
-    .premium-card h2,
-    .premium-card h3,
-    .premium-card h4 {
-        color: white !important;
-    }
-}       
+    background: var(--background-color);
+    color: var(--text-color);
+    border-radius: 24px;
+    padding: 32px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    margin-bottom: 20px;
+    border: 1px solid rgba(128, 128, 128, 0.2);
+}
 
     /* Premium Button Style */
     .stButton>button {
